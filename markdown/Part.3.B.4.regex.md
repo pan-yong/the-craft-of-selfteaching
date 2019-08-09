@@ -5,7 +5,7 @@
 
 Wikipedia 上对正则表达式的说明如下：
 
-> **正则表达式**（英语：Regular Expression，在代码中常简写为 regex、regexp 或 RE），又称_正规表示式_、_正规表示法_、_正规运算式_、_规则运算式_、_常规表示法_，是计算机科学的一个概念。正则表达式使用单个字符串来描述、匹配一系列符合某个句法规则的字符串。在很多文本编辑器里，正则表达式通常被用来检索、替换那些符合某个模式的文本。许多程序设计语言都支持利用正则表达式进行字符串操作。例如，在 Perl 中就内建了一个功能强大的正则表达式引擎。正则表达式这个概念最初是由 Unix 中的工具软件（例如 sed 和 grep）普及开的。
+> **正则表达式**（英语：Regular Expression，在代码中常简写为 regex、regexp 或 RE），又称*正规表示式*、*正规表示法*、*正规运算式*、*规则运算式*、*常规表示法*，是计算机科学的一个概念。正则表达式使用单个字符串来描述、匹配一系列符合某个句法规则的字符串。在很多文本编辑器里，正则表达式通常被用来检索、替换那些符合某个模式的文本。许多程序设计语言都支持利用正则表达式进行字符串操作。例如，在 Perl 中就内建了一个功能强大的正则表达式引擎。正则表达式这个概念最初是由 Unix 中的工具软件（例如 sed 和 grep）普及开的。
 
 以下是绝大多数翻译成中文的教程中对正则表达式进行讲解时所使用的描述：
 
@@ -31,19 +31,21 @@ Wikipedia 上对正则表达式的说明如下：
 
 现在，我们已经把术语全部 “解密” 了，然后再看看下面的表述：
 
-> 我们可以用书写特定的规则，用来在文本中捕获与规则一致的字符串，而后对其进行操作…… 
+> 我们可以用书写特定的规则，用来在文本中捕获与规则一致的字符串，而后对其进行操作……
 
 理解起来相当顺畅。
 
-以下的 Python 代码中，[`\wo\w`](https://regexper.com#%5Cwo%5Cw) 就是一个_规则表达式_（或称为_规则_）；
+以下的 Python 代码中，[`\wo\w`](https://regexper.com#%5Cwo%5Cw) 就是一个*规则表达式*（或称为*规则*）；
 
 而 `re.findall(pttn, str)` 的作用就是，在 `str` 里找到所有与这个**规则**（Pattern，模式）**一致**（Match，匹配）的字符串：
+
 ```python
 import re
 str = 'The quick brown fox jumps over the lazy dog'
 pttn = re.compile(r'\wo\w')
 re.findall(pttn, str)
 ```
+
     ['row', 'fox', 'dog']
 
 总结一下：
@@ -64,7 +66,7 @@ re.findall(pttn, str)
 
 我们最好先直接看看 Regex 的工作过程。以下，是用微软发行的代码编辑工具 Visual Studio Code 针对一小段文本使用若干条 Regex 进行匹配的过程：
 
-![](../images/regex-test.gif)
+![](https://raw.githubusercontent.com/selfteaching/the-craft-of-selfteaching/master/images/regex-test.gif?raw=true)
 
 Python 的项目代码仓库里有一个很简短的 Demo 程序，叫 [`redemo.py`](https://github.com/python/cpython/blob/master/Tools/demo/redemo.py)，它使用 [Tcl/Tk](https://docs.python.org/3/library/tkinter.html) 作为图形界面，也可以用来测试正则表达式。
 
@@ -74,13 +76,13 @@ Python 的项目代码仓库里有一个很简短的 Demo 程序，叫 [`redemo.
 
 它运行起来长成这样：
 
-![](../images/redemo.png)
+![](https://raw.githubusercontent.com/selfteaching/the-craft-of-selfteaching/master/images/redemo.png?raw=true)
 
 目前（2019）网上最方便的 Regex 测试器，是 [regex101.com](https://regex101.com)：
 
-以下，就是在一段文本中，找出所有首写字母大写的词汇的_过程_，并将其先全部替换成小写，再将其全部替换为大写的过程；使用的正则表达式是 `([A-Z])\w+`，替换表达式分别是 `\L$1` 和 `\U$1`：
+以下，就是在一段文本中，找出所有首写字母大写的词汇的*过程*，并将其先全部替换成小写，再将其全部替换为大写的过程；使用的正则表达式是 `([A-Z]\w+)`，替换表达式分别是 `\L$1` 和 `\U$1`：
 
-![](../images/regex101.gif)
+![](https://raw.githubusercontent.com/selfteaching/the-craft-of-selfteaching/master/images/regex101.gif?raw=true)
 
 这个网站太好了，所以，平日里我是用 [Nativefier](https://github.com/jiahaog/nativefier) 工具将这个网站打包为一个 Mac Desktop App 使用。不过，它也有局限，就是被搜索文件略微大点就报错，说 `timeout`……
 
@@ -93,6 +95,7 @@ Python 的项目代码仓库里有一个很简短的 Demo 程序，叫 [`redemo.
 **注意**：在 Python 代码中，写 Pattern 的时候，之所以要在字符串 `'...'` 之前加上 `r`，写成 `r'...'`，是因为如果不用 raw string 的话，那么，每个转义符号都要写成 `\\`；如果用 raw string，转义符号就可以直接使用 `\` 本身了…… 当然，如果你想搜索 `\` 这个符号本身的话，那么还是得写 `\\`。
 
 而 `re.findall(pttn, str)` 的意思是说，把 `str` 中所有与 `pttn` 这个规则一致的字符串都找出来：
+
 ```python
 import re
 with open('regex-target-text-sample.txt', 'r') as f:
@@ -100,9 +103,11 @@ with open('regex-target-text-sample.txt', 'r') as f:
 pttn = r'beg[iau]ns?'
 re.findall(pttn, str)
 ```
+
     ['begin', 'began', 'begun', 'begin']
 
 文件 `regex-target-text-sample.txt` 中的内容如下：
+
 ```html
 <ol>
     <li><pre>begin began begun bigins begining</pre></li>
@@ -131,6 +136,7 @@ a$4Bh9XE&E
 <p>It's very very big.</p>
 <p>Keep it simple, simple, simple!</p>
 ```
+
 在以下的示例中，有时直接设定了 str 的值，而不是使用以上整个文本文件 —— 因为读者在阅读的时候，最好能直接看到被搜索的字符串。另外，如果使用整个文件，所得到的 Match 太多，也确实影响阅读。
 
 ## 优先级
@@ -143,20 +149,15 @@ Regex 也一样，它本身就是个迷你语言（Mini Language）。在 Regex 
 
 先大致看看它的操作符优先级，你就会对它有相当不错的了解：
 
-| 排列 |         原子与操作符优先级      | 从高到低 )  |
-| 排列 |         原子与操作符优先级      | 从高到低）|
-| 排列 |         原子与操作符优先级      | 从高到低）|
+| 排列 |         原子与操作符优先级      |（从高到低）|
 |---|-----------------------------------|------------------------|
 | 1 | 转义符号 (Escaping Symbol)               | `\` |
 | 2 | 分组、捕获 (Grouping or Capturing)                          | `(...)` `(?:...)` `(?=...)` `(?!...)` `(?<=...)` `(?<!...)`     |
 | 3 | 数量 (Quantifiers)      | `a*` `a+` `a?` `a{n, m}` |
-| 4 | 序列与定位（Sequence and Anchor      | `abc` `^` `$` `\b` `\B`               |
-| 5 | 或（Alternation）                       | `a\|b\|c`                   |
-| 5 | 或（Alternation）| `a\|b\|c`                   |
+| 4 | 序列与定位（Sequence and Anchor）| `abc` `^` `$` `\b` `\B`               |
 | 5 | 或（Alternation）| `a\|b\|c`                   |
 | 6 | 原子 (Atoms)                 | `a` `[^abc]` `\t` `\r` `\n` `\d` `\D` `\s` `\S` `\w` `\W` `.` |
 
-当然，你若是在之前，没有自学过、理解过 Python（或者任何其它编程语言）表达式中的操作符优先级，那么一上来就看上面的表格不仅对你没有帮助，只能让你更迷惑。
 当然，你若是在之前，没有自学过、理解过 Python（或者任何其它编程语言）表达式中的操作符优先级，那么一上来就看上面的表格不仅对你没有帮助，只能让你更迷惑。
 
 —— 这就是理解能力逐步积累逐步加强的过程。
@@ -172,6 +173,7 @@ Regex 也一样，它本身就是个迷你语言（Mini Language）。在 Regex 
 本义字符包括从 `a` 到 `z`，`A` 到 `Z`，`0` 到 `9`，还有 `_` —— 它们所代表的就是它们的字面值。
 
 即，相当于，`string.ascii_letters` 和 `string.digits` 以及 `_`。
+
 ```python
 from IPython.core.interactiveshell import InteractiveShell
 InteractiveShell.ast_node_interactivity = "all"
@@ -180,6 +182,7 @@ import string
 string.ascii_letters
 string.digits
 ```
+
     'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
     '0123456789'
 
@@ -187,7 +190,7 @@ string.digits
 
 > `\` `+` `*` `.` `?` `-` `^` `$` `|` `(` `)` `[` `]` `{` `}` `<` `>`
 
-当你在写 Regex 的时候，如果你需要搜索的字符不是本义字符，而是以上这些特殊字符时，_建议_都直接加上转义符号 `\` 来表示，比如，你想搜索 `'`，那你就写 `\'`，或者你想搜索 `#` 那你就写 `\#`（事实上，`#` 并不是 Regex 的特殊符号，所以，它之前的转义符号可有可无）—— 这对初学者来说可能是最安全的策略。
+当你在写 Regex 的时候，如果你需要搜索的字符不是本义字符，而是以上这些特殊字符时，*建议*都直接加上转义符号 `\` 来表示，比如，你想搜索 `'`，那你就写 `\'`，或者你想搜索 `#` 那你就写 `\#`（事实上，`#` 并不是 Regex 的特殊符号，所以，它之前的转义符号可有可无）—— 这对初学者来说可能是最安全的策略。
 
 跟过往一样，所有的细节都很重要，它们就是需要花时间逐步熟悉到牢记。
 
@@ -198,6 +201,7 @@ string.digits
 标示集合原子，使用方括号 `[]`。`[abc]` 的意思是说，“`a` or `b` or `c`”，即，`abc` 中的任意一个字符。
 
 比如，[`beg[iau]n`](https://regexper.com#beg[iau]n) 能够代表 `begin`、`began`，以及 `begun`。
+
 ```python
 import re
 
@@ -205,12 +209,12 @@ str = 'begin began begun bigins begining'
 pttn = r'beg[iau]n'
 re.findall(pttn, str)
 ```
+
     ['begin', 'began', 'begun', 'begin']
 
 在方括号中，我们可以使用两个操作符：`-`（区间）和 `^`（非）。
 
 * `[a-z]` 表示从小写字母 `a` 到小写字母 `z` 中的任意一个字符。
-* `[^abc]` 表示 `abc` 以外的其它任意字符，即，非 `[abc]`。
 * `[^abc]` 表示 `abc` 以外的其它任意字符，即，非 `[abc]`。
 
 注意，一个集合原子中，`^` 符号只能用一次，只能紧跟在 `[` 之后。否则不起作用。
@@ -228,9 +232,7 @@ re.findall(pttn, str)
 `\W` 任意非本义字符；等价于 `[^a-zA-Z0-9_]`
 
 `\s` 任意空白；相当于 `[ \f\n\r\t\v]`（注意，方括号内第一个字符是空格符号）
-`\s` 任意空白；相当于 `[ \f\n\r\t\v]`（注意，方括号内第一个字符是空格符号）
 
-`\S` 任意非空白；相当于 `[^ \f\n\r\t\v]`（注意，紧随 `^` 之后的是一个空格符号）
 `\S` 任意非空白；相当于 `[^ \f\n\r\t\v]`（注意，紧随 `^` 之后的是一个空格符号）
 
 `.` 除 `\r` `\n` 之外的任意字符；相当于 `[^\r\n]`
@@ -241,14 +243,14 @@ re.findall(pttn, str)
 > * `w` 是 word characters
 > * `s` 是 spaces
 
-另外，在空白的集合 `[ \f\n\r\t\v]` 中：`f` 是分页符；`\n` `\r` 是换行符；`\t` 是制表符；`\v` 是纵向制表符（很少用到）。各种关于空白的转义符也同样挺好记忆的，如果你知道各个字母是那个词的首字母的话：
-另外，在空白的集合 `[ \f\n\r\t\v]` 中：`f` 是分页符；`\n` `\r` 是换行符；`\t` 是制表符；`\v` 是纵向制表符（很少用到）。各种关于空白的转义符也同样挺好记忆的，如果你知道各个字母是那个词的首字母的话：
+另外，在空白的集合 `[ \f\n\r\t\v]` 中：`\f` 是分页符；`\n` `\r` 是换行符；`\t` 是制表符；`\v` 是纵向制表符（很少用到）。各种关于空白的转义符也同样挺好记忆的，如果你知道各个字母是那个词的首字母的话：
 
 > * `f` 是 flip
 > * `n` 是 new line
 > * `r` 是 return
 > * `t` 是 tab
 > * `v` 是 vertical tab
+
 ```python
 import re
 
@@ -256,6 +258,7 @@ str = '<dl>(843) 542-4256</dl> <dl>(431) 270-9664</dl>'
 pttn = r'\d\d\d\-'
 re.findall(pttn, str)
 ```
+
     ['542-', '270-']
 
 ### 边界原子
@@ -269,6 +272,7 @@ re.findall(pttn, str)
 `\b` 匹配单词的边界；[`er\b`](https://regexper.com#er%5Cb)，能匹配 `coder` 中的 `er`，却不能匹配 `error` 中的 `er`；
 
 `\B` 匹配非单词边界；[`er\B`](https://regexper.com#er%5CB)，能匹配 `error` 中的 `er`，却不能匹配 `coder` 中的 `er`。
+
 ```python
 import re
 
@@ -278,6 +282,7 @@ re.findall(pttn, str)
 pttn = r'er\B'
 re.findall(pttn, str)
 ```
+
     ['er', 'er', 'er']
     ['er', 'er']
 
@@ -292,7 +297,6 @@ re.findall(pttn, str)
 另外，`()` 这个操作符，有两个作用：**组合**（Grouping），就是我们刚刚讲到的作用；而另外一个作用是**捕获**（Capturing)，后面会讲到。
 
 注意区别，[`er`](https://regexper.com#er)、[`[er]`](https://regexper.com#[er]) 和 [`(er)`](https://regexper.com#(er) 各不相同。
-注意区别，[`er`](https://regexper.com#er)、[`[er]`](https://regexper.com#[er]) 和 [`(er)`](https://regexper.com#(er) 各不相同。
 
 > * `er` 是两个原子，`'e'` 和紧随其后的 `'r'`
 > * `[er]` 是一个原子，或者 `'e'` 或者 `'r'`；
@@ -303,14 +307,11 @@ re.findall(pttn, str)
 ## 数量操作符
 
 数量操作符有：`+` `?` `*` `{n, m}`。
-数量操作符有：`+` `?` `*` `{n, m}`。
 
 它们是用来限定位于它们之前的原子允许出现的个数；不加数量限定则代表出现一次且仅出现一次：
 
 `+` 代表前面的原子必须至少出现一次，即：` 出现次数 ≧ 1`
 
-> 例如，[`go+gle`](https://regexper.com#go+gle)可以匹配 `google` `gooogle` `goooogle` 等;
-> 例如，[`go+gle`](https://regexper.com#go+gle)可以匹配 `google` `gooogle` `goooogle` 等；
 > 例如，[`go+gle`](https://regexper.com#go+gle)可以匹配 `google` `gooogle` `goooogle` 等；
 
 `?` 代表前面的原子最多只可以出现一次，即：`0 ≦ 出现次数 ≦ 1`
@@ -328,6 +329,7 @@ re.findall(pttn, str)
 `{n, m}` 之前的原子出现至少 `n` 次，至多 `m` 次
 
 > 例如，[`go{2,5}gle`](https://regexper.com#go%7B2,5%7Dgle)，能匹配 `google` `gooogle` `goooogle` 或 `gooooogle`，但不能匹配 `gogle` 和 `gooooooogle`
+
 ```python
 from IPython.core.interactiveshell import InteractiveShell
 InteractiveShell.ast_node_interactivity = "all"
@@ -348,9 +350,13 @@ re.findall(pttn, str)
 pttn = r'520*'
 re.findall(pttn, str)
 ```
+
     ['google', 'gooogle', 'goooogle', 'goooooogle']
+    
     ['google', 'gooogle', 'goooogle']
+    
     ['coloured', 'colored']
+    
     ['520', '52000', '5200000', '520000000', '520000000000']
 
 数量操作符是对它之前的原子进行操作的，换言之，数量操作符的操作元是操作符之前的原子。
@@ -360,6 +366,7 @@ re.findall(pttn, str)
 > * `er` 是两个原子，`'e'` 之后 `'r'`
 > * `[er]` 是一个原子，或者 `'e'` 或者 `'r'`；
 > * `(er)` 是一个原子，`'er'`
+
 ```python
 from IPython.core.interactiveshell import InteractiveShell
 InteractiveShell.ast_node_interactivity = "all"
@@ -377,14 +384,18 @@ re.findall(pttn, str)
 pttn = r'(er)'
 re.findall(pttn, str)
 ```
+
     ['er', 'er', 'er', 'er']
     ['e', 'r', 'r', 'r', 'e', 'r', 'e', 'r', 'e', 'e', 'r', 'e', 'e']
     ['er', 'er', 'er', 'er']
 
-在以上的例子中，看不出 `er` 和 `(er)` 的区别，但是，加上数量操作符就不一样了 —— 因为_数量操作符只对它之前的那一个原子进行操作_：
+在以上的例子中，看不出 `er` 和 `(er)` 的区别，但是，加上数量操作符就不一样了 —— 因为*数量操作符只对它之前的那一个原子进行操作*：
+
 ```python
 from IPython.core.interactiveshell import InteractiveShell
 InteractiveShell.ast_node_interactivity = "all"
+
+import re
 
 str = 'error wonderer severeness'
 
@@ -397,6 +408,7 @@ re.findall(pttn, str)
 pttn = r'(er)+'
 re.findall(pttn, str)
 ```
+
     ['err', 'er', 'er', 'er']
     ['err', 'r', 'erer', 'e', 'ere', 'e']
     ['er', 'er', 'er']
@@ -406,6 +418,7 @@ re.findall(pttn, str)
 或操作符 `|` 是所有操作符中优先级最低的，数量操作符的优先级比它高，所以，在 `|` 前后的原子被数量操作符（如果有的话）操作之后才交给 `|` 操作。
 
 于是，[`begin|began|begun`](https://regexper.com#begin%7Cbegan%7Cbegun) 能够匹配 `begin` 或 `began` 或 `begun`。
+
 ```python
 import re
 
@@ -413,11 +426,12 @@ str = 'begin began begun begins beginn'
 pttn = r'begin|began|begun'
 re.findall(pttn, str)
 ```
+
     ['begin', 'began', 'begun', 'begin', 'begin']
 
 在集合原子中（即，`[]` 内的原子）各个原子之间的关系，只有 “或” —— 相当于方括号中的每个原子之间都有一个被省略的 `|`。
 
-**注意**：中括号的 `|` 不被当作特殊符号，而是被当作 `|` 这个符号本身。在中括号中的圆括号，也被当作圆括号 `()` 本身，而无分组含义。
+**注意**：方括号的 `|` 不被当作特殊符号，而是被当作 `|` 这个符号本身。在方括号中的圆括号，也被当作圆括号 `()` 本身，而无分组含义。
 
 ```python
 from IPython.core.interactiveshell import InteractiveShell
@@ -441,6 +455,7 @@ re.findall(pttn, str)
 pttn = r'[a|ae|(ae)]'
 re.findall(pttn, str)
 ```
+
     ['a', 'a', 'e', 'a', 'a', 'e', 'a', 'a', '|', 'e']
 
 ## 匹配并捕获
@@ -448,6 +463,7 @@ re.findall(pttn, str)
 捕获（Capture），使用的是圆括号 `()`。使用圆括号得到的匹配的值被暂存成一个带有索引的列表，第一个是 `$1`，第二个是 `$2`…… 以此类推。随后，我们可以在替换的过程中使用 `$1` `$2` 中所保存的值。
 
 **注意**：在 Python 语言中调用 `re` 模块之后，在 `re.sub()` 中调用被匹配的值，用的索引方法是 `\1`、`\2`…… 以此类推。
+
 ```python
 import re
 str = 'The white dog wears a black hat.'
@@ -459,7 +475,9 @@ re.sub(pttn, repl, str)
 
 repl = r'The \1 dog wears a \1 hat.'
 re.sub(pttn, repl, str)
+
 ```
+
     [('white', 'black')]
     'The black dog wears a white hat.'
     'The white dog wears a white hat.'
@@ -467,19 +485,22 @@ re.sub(pttn, repl, str)
 ## 非捕获匹配
 
 有时，你并不想捕获圆括号中的内容，在那个地方你使用括号的目的只是分组，而非捕获，那么，你就在圆括号内最开头加上 `?:` —— `(?:...)`：
+
 ```python
 import re
 str = 'The white dog wears a black hat.'
 pttn = r'The (?:white|black) dog wears a (white|black) hat.'
 re.findall(pttn, str)                   # 只捕获了一处，也就是说只有一个值将来可以被引用
 
-repl = r'The \1 dog wears a \1 hat.'    # 不过，可替换的位置却有两个（即便非捕获匹配，也有可替换位置）
+repl = r'The \1 dog wears a \1 hat.'    # 之前的一处捕获，在替换时可被多次引用
+書評
 re.sub(pttn, repl, str)
-```
-    ['black']
-    'The black dog wears a black hat.'
 
-需要注意的是，虽然非匹配捕获不将匹配值暂存以便随后替换时调用，但匹配处依然是将来可被替换的位置。
+```
+
+    ['black']
+    
+    'The black dog wears a black hat.'
 
 在 Python 代码中使用正则表达式，匹配和捕获以及随后的替换，有更灵活的方式，因为可以对那些值直接编程。`re.sub()` 中，`repl` 参数甚至可以接收另外一个函数作为参数 —— 以后你肯定会自行认真阅读以下页面中的所有内容：
 
@@ -492,7 +513,7 @@ re.sub(pttn, repl, str)
 能匹配 `Windows2000` 中的 `Windows`，但不能匹配 `Windows3.1` 中的 `Windows`。预查不消耗字符，也就是说，在一个匹配发生后，在最后一次匹配之后立即开始下一次匹配的搜索，而不是从包含预查的字符之后开始。
 
 `(?!pattern)`
-> 正向否定预查（negative assert），在任何不匹配规则的字符串开始处匹配查找字符串。这是一个非获取匹配，也就是说，该匹配不需要获取供以后使用。例如[`Windows(?!95|98|NT|2000)`](https://regexper.com#Windows(?!95%7C98%7CNT%7C2000))
+> 正向否定预查（negative assert），在任何不匹配规则的字符串开始处匹配查找字符串。这是一个非获取匹配，也就是说，该匹配不需要获取供以后使用。例如[`Windows(?!95|98|NT|2000)`](https://regexper.com#Windows(?=95%7C98%7CNT%7C2000))
 能匹配 `Windows3.1` 中的 `Windows`，但不能匹配 `Windows2000` 中的 `Windows`。预查不消耗字符，也就是说，在一个匹配发生后，在最后一次匹配之后立即开始下一次匹配的搜索，而不是从包含预查的字符之后开始。
 
 `(?<=pattern)`
@@ -512,19 +533,15 @@ re.sub(pttn, repl, str)
 > * `\d`, `\D`, `\w`, `\W`, `\s`, `\S`, `\b`, 和 `\B` 等只限于 ASCII 字符
 > * 行内写法：`(?a)`
 > * Python re 模块中的常量：`re.A` `re.ASCII`
-> * Python re 模块中的常量：`re.A` `re.ASCII`
 
-`I`/`IGNORECASE`，默认为 `False`
 `I`/`IGNORECASE`，默认为 `False`
 
 > * 忽略字母大小写
-> * 行内写法：`(?i)`
 > * 行内写法：`(?i)`
 > * Python re 模块中的常量：`re.I` `re.IGNORECASE`
 
 `G`/`GLOBAL`，默认为 `True`
 > * 找到第一个 match 之后不返回
-> * 行内写法：`(?g)`
 > * 行内写法：`(?g)`
 > * Python re 模块中这个标记不能更改，默认为 TRUE
 
@@ -532,31 +549,22 @@ re.sub(pttn, repl, str)
 
 > * 由本地语言设置决定 `\d`, `\D`, `\w`, `\W`, `\s`, `\S`, `\b`, 和 `\B` 等等的内容
 > * 行内写法：`(?L)`
-> * 行内写法：`(?L)`
 > * Python re 模块中的常量：`re.L` `re.LOCALE`
 
 `M`/`MULTILINE`，默认为 `True`
 
 > * 使用本标志后，`^` 和 `$` 匹配行首和行尾时，会增加换行符之前和之后的位置。
-> * 使用本标志后，`^` 和 `$` 匹配行首和行尾时，会增加换行符之前和之后的位置。
 > * 行内写法：`(?m)`
-> * 行内写法：`(?m)`
-> * Python re 模块中的常量：`re.M` `re.MULTILINE`
 > * Python re 模块中的常量：`re.M` `re.MULTILINE`
 
 `S`/`DOTALL`，默认为 `False`
 > * 使 `.` 完全匹配任何字符，包括换行；没有这个标志，`.` 匹配除了 `n` `r` 之外的任何字符。
-> * 使 `.` 完全匹配任何字符，包括换行；没有这个标志，`.` 匹配除了 `n` `r` 之外的任何字符。
 > * 行内写法：`(?s)`
-> * 行内写法：`(?s)`
-> * Python re 模块中的常量：`re.S` `re.DOTALL`
 > * Python re 模块中的常量：`re.S` `re.DOTALL`
 
 `X`/`VERBOSE`，默认为 `False`
 > * 当该标志被指定时，Pattern 中的的空白符会被忽略，除非该空白符在圆括号或方括号中，或在反斜杠 `\ ` 之后。这样做的结果是允许将注释写入 Pattern，这些注释会被 Regex 解析引擎忽略。注释用 `#` 号来标识，不过该符号不能在字符串或反斜杠之后。
 > * 行内写法：`(?x)`
-> * 行内写法：`(?x)`
-> * Python re 模块中的常量：`re.X` `re.VERBOSE`
 > * Python re 模块中的常量：`re.X` `re.VERBOSE`
 
 ## 几个最常用的 Regex
@@ -593,8 +601,7 @@ re.sub(pttn, repl, str)
 写 Regex 最烧脑的地方在于 “使其全面” —— 要考虑到各种意外情况。
 
 当然，除非必要，也不要在 “全面” 这事上面花太多时间 —— 给你看一个据说是 “最大程度上能够匹配所有 email 地址的 Regex” <a href='#fn4' name='fn4b'><sup>[4]</sup></a>，我都懒得测试的一个正则表达式：
-当然，除非必要，也不要在 “全面” 这事上面花太多时间 —— 给你看一个据说是 “最大程度上能够匹配所有 email 地址的 Regex” <a href='#fn4' name='fn4b'><sup>[4]</sup></a>，我都懒得测试的一个正则表达式：
-当然，除非必要，也不要在 “全面” 这事上面花太多时间 —— 给你看一个据说是 “最大程度上能够匹配所有 email 地址的 Regex” <a href='#fn4' name='fn4b'><sup>[4]</sup></a>，我都懒得测试的一个正则表达式：
+
 ```regex
 (?:(?:\r\n)?[ \t])*(?:(?:(?:[^()<>@,;:\\".\[\] \000-\031]+(?:(?:(?:\r\n)?[ \t]
 )+|\Z|(?=[\["()<>@,;:\\".\[\]]))|"(?:[^\"\r\\]|\\.|(?:(?:\r\n)?[ \t]))*"(?:(?:
@@ -679,9 +686,10 @@ r\\]|\\.)*\](?:(?:\r\n)?[ \t])*)(?:\.(?:(?:\r\n)?[ \t])*(?:[^()<>@,;:\\".\[\]
 |(?=[\["()<>@,;:\\".\[\]]))|\[([^\[\]\r\\]|\\.)*\](?:(?:\r\n)?[ \t])*))*\>(?:(
 ?:\r\n)?[ \t])*))*)?;\s*)
 ```
+
 ## 趣事一则
 
-[ELIZA](https://en.wikipedia.org/wiki/ELIZA) 是人类史上第一个 “聊天机器人” 程序，上个世纪六十年代，1966 年实现的。核心就是使用正则表达式匹配对方语句中的关键词汇，再经过替换，形成看似有意义的 “回应” —— 事实上，ELIZA 完全不知道自己在说什么…… 
+[ELIZA](https://en.wikipedia.org/wiki/ELIZA) 是人类史上第一个 “聊天机器人” 程序，上个世纪六十年代，1966 年实现的。核心就是使用正则表达式匹配对方语句中的关键词汇，再经过替换，形成看似有意义的 “回应” —— 事实上，ELIZA 完全不知道自己在说什么……
 
 几年后，就是七十年代初，1972 年，另外一个聊天机器人 [Parry](https://en.wikipedia.org/wiki/PARRY) <a href='#fn5' name='fn5b'><sup>[5]</sup></a>被写了出来…… 随后第二年，这两个聊天机器人在 ARPANET “碰面” 好好地聊了一下<a href='#fn6' name='fn6b'><sup>[6]</sup></a>：
 
@@ -712,23 +720,16 @@ r\\]|\\.)*\](?:(?:\r\n)?[ \t])*)(?:\.(?:(?:\r\n)?[ \t])*(?:[^()<>@,;:\\".\[\]
 > ......
 
 以下是后人用 Python 重新实现的 ELIZA 的程序代码，你可以直接执行它，尝试一下与 ELIZA 聊聊天：
+
 ```python
 # %load https://raw.githubusercontent.com/jezhiggins/eliza.py/master/eliza.py
 #----------------------------------------------------------------------
-# ----------------------------------------------------------------------
-# ----------------------------------------------------------------------
-# eliza.py
-# eliza.py
-# 
-# a cheezy little Eliza knock-off by Joe Strout
-# a cheezy little Eliza knock-off by Joe Strout
-# with some updates by Jeff Epler
-# with some updates by Jeff Epler
-# hacked into a module and updated by Jez Higgins
-# hacked into a module and updated by Jez Higgins
+#  eliza.py
+#
+#  a cheezy little Eliza knock-off by Joe Strout
+#  with some updates by Jeff Epler
+#  hacked into a module and updated by Jez Higgins
 #----------------------------------------------------------------------
-# ----------------------------------------------------------------------
-# ----------------------------------------------------------------------
 
 import string
 import re
@@ -778,14 +779,9 @@ class eliza:
         return resp
 
 #----------------------------------------------------------------------
-# ----------------------------------------------------------------------
-# ----------------------------------------------------------------------
 # gReflections, a translation table used to convert things you say
-# into things the computer says back, e.g. "I am" --> "you are"
-# into things the computer says back, e.g. "I am" --> "you are"
+#    into things the computer says back, e.g. "I am" --> "you are"
 #----------------------------------------------------------------------
-# ----------------------------------------------------------------------
-# ----------------------------------------------------------------------
 gReflections = {
   "am"   : "are",
   "was"  : "were",
@@ -804,18 +800,11 @@ gReflections = {
 }
 
 #----------------------------------------------------------------------
-# ----------------------------------------------------------------------
-# ----------------------------------------------------------------------
 # gPats, the main response table.  Each element of the list is a
-# two-element list; the first is a regexp, and the second is a
-# two-element list; the first is a regexp, and the second is a
-# list of possible responses, with group-macros labelled as
-# list of possible responses, with group-macros labelled as
-# %1, %2, etc.
-# %1, %2, etc.
+#  two-element list; the first is a regexp, and the second is a
+#  list of possible responses, with group-macros labelled as
+#  %1, %2, etc.
 #----------------------------------------------------------------------
-# ----------------------------------------------------------------------
-# ----------------------------------------------------------------------
 gPats = [
   [r'I need (.*)',
   [  "Why do you need %1?",
@@ -1023,13 +1012,8 @@ gPats = [
   ]
 
 #----------------------------------------------------------------------
-# ----------------------------------------------------------------------
-# ----------------------------------------------------------------------
-# command_interface
-# command_interface
+#  command_interface
 #----------------------------------------------------------------------
-# ----------------------------------------------------------------------
-# ----------------------------------------------------------------------
 def command_interface():
   print('Therapist\n---------')
   print('Talk to the program by typing in plain English, using normal upper-')
@@ -1051,7 +1035,9 @@ def command_interface():
 
 if __name__ == "__main__":
   command_interface()
+
 ```
+
     Therapist
     ---------
     Talk to the program by typing in plain English, using normal upper-
@@ -1078,8 +1064,6 @@ if __name__ == "__main__":
 
 <a href='#fn4b'><small>↑Back to Content↑</small></a>
 
-<a name='fn5'>[5]</a>：Parry 的源代码（用 Lisp 写的）在这里：http://www.cs.cmu.edu/afs/cs/project/ai-repository/ai/areas/classics/parry/</a>
-<a name='fn5'>[5]</a>：Parry 的源代码（用 Lisp 写的）在这里：http://www.cs.cmu.edu/afs/cs/project/ai-repository/ai/areas/classics/parry/</a>
 <a name='fn5'>[5]</a>：Parry 的源代码（用 Lisp 写的）在这里：http://www.cs.cmu.edu/afs/cs/project/ai-repository/ai/areas/classics/parry/</a>
 
 <a href='#fn5b'><small>↑Back to Content↑</small></a>

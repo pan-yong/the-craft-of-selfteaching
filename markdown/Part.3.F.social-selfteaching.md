@@ -36,6 +36,7 @@
 进而，想要把一门手艺搞到真正 “精湛” 的地步，最有效的方法就是尽早进入 “造” 的阶段 —— 所谓的 “造”，就是不断**创造**的 “造”。
 
 自学这门手艺，很简单，就是不断地学：
+
 ```python
 def teach_yourself(anything):
     while not create():
@@ -45,6 +46,7 @@ def teach_yourself(anything):
 
 teach_yourself(coding)
 ```
+
 学上几个，自然就很精湛。而其它的用自学这门手艺习得的手艺，基本上都可以用 “是否做出了像样的作品” 作为检验自己的那门手艺是否达到了精湛的衡量指标。
 
 硅谷有一家著名的孵化器，叫 Y-Combinator，现在的掌门人是个很年轻的人，Samuel H. Altman。他在那篇著名的文章《[Advice for ambitious 19 year olds](https://blog.samaltman.com/advice-for-ambitious-19-year-olds)》中有一个精彩的建议：
@@ -113,11 +115,11 @@ Github 能成为地球上最大的有效社交网络，没毛病，因为**用�
 
 <a name='fn1'>[1]</a>：NPR：[Most Beautiful Woman' By Day, Inventor By Night](https://www.npr.org/2011/11/27/142664182/most-beautiful-woman-by-day-inventor-by-night)
 
-![](../images/Lamarr_patent.png)
+![](https://raw.githubusercontent.com/selfteaching/the-craft-of-selfteaching/master/images/Lamarr_patent.png?raw=true)
 
 上图是保存在美国专利局的一个存档文件（US Patent 2,292,387, Aug 11, 1942）截图。这项专利的发明者是 [Hedy Lamarr](https://en.wikipedia.org/wiki/Hedy_Lamarr)，人家长得是这样的：
 
-![](../images/hedy-lamarr-hero-getty.jpg)
+![](https://raw.githubusercontent.com/selfteaching/the-craft-of-selfteaching/master/images/hedy-lamarr-hero-getty.jpg?raw=true)
 
 Hedy Lamarr 是好莱坞最知名的演员之一，并且，她也是自学高手：
 

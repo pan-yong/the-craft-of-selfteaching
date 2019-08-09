@@ -1,7 +1,7 @@
 
 # 类 —— Python 的实现
 
-既然已经在不碰代码的情况下，把 OOP 中的主要概念梳理清楚了，以下的行文中，那些概念就直接用英文罢，省得理解上还得再绕个弯…… 
+既然已经在不碰代码的情况下，把 OOP 中的主要概念梳理清楚了，以下的行文中，那些概念就直接用英文罢，省得理解上还得再绕个弯……
 
 ## Defining Class
 
@@ -10,6 +10,7 @@ Class 使用 `class` 关键字进行定义。
 与函数定义不同的地方在于，Class 接收参数不是在 `class Classname():` 的括号里完成 —— 那个圆括号有另外的用处。
 
 让我们先看看代码，而后再逐一解释：
+
 ```python
 from IPython.core.interactiveshell import InteractiveShell
 InteractiveShell.ast_node_interactivity = "all"
@@ -35,9 +36,10 @@ type(g.built_year)
 type(g.__init__)
 type(g.say_hi)
 ```
+
     'Clay'
     2019
-    <bound method Golem.say_hi of <__main__.Golem object at 0x107bac278>>
+    <bound method Golem.say_hi of <__main__.Golem object at 0x10430e7b8>>
     Hi!
     __main__.Golem
     str
@@ -46,6 +48,7 @@ type(g.say_hi)
     method
 
 以上，我们创建了一个 Class:
+
 ```python
 class Golem:
 
@@ -53,6 +56,7 @@ class Golem:
         self.name = name
         self.built_year = datetime.date.today().year
 ```
+
 其中定义了当我们根据这个 Class 创建一个实例的时候，那个 Object 的初始化过程，即 `__init__()` 函数 —— 又由于这个函数是在 Class 中定义的，我们称它为 Class 的一个 Method。
 
 这里的 `self` 就是个变量，跟程序中其它变量的区别在于，它是一个系统默认可以识别的变量，用来指代将来用这个 Class 创建的 Instance。
@@ -61,21 +65,22 @@ class Golem:
 
 注意：`self` 这个变量的定义，是在 `def __init__(self, ...)` 这一句里完成的。对于这个变量的名称取名没有强制要求，你实际上可以随便用什么名字，很多 C 程序员会习惯于将这个变量命名为 `this` —— 但根据惯例，你最好还是只用 `self` 这个变量名，省得给别人造成误会。
 
-在 Class 的代码中，如果定义了 `__init__()` 函数，那么系统就会将它当作用来 Instance 在创建后被初始化的函数。这个函数名称是强制指定的，初始化函数必须使用这个名称；注意 `init` 两端各有两个下划线 `_`。
+在 Class 的代码中，如果定义了 `__init__()` 函数，那么系统就会将它当作 Instance 在创建后被初始化的函数。这个函数名称是强制指定的，初始化函数必须使用这个名称；注意 `init` 两端各有两个下划线 `_`。
 
-当我们用 `g = Golem('Clay')` 这一句创建了一个 Golam 的 Instance 的时候，以下一连串的事情发生了：
+当我们用 `g = Golem('Clay')` 这一句创建了一个 Golem 的 Instance 的时候，以下一连串的事情发生了：
 
 > * `g` 从此之后就是一个根据 Golem 这个 Class 创建的 Instance，对使用者来说，它就是个 Object；
-> * 因为 Golem 这个 Class 的代码中有 `__init__()`，所以，当 `g` 被创建的时候，`g` 就需要被初始化…… 
+> * 因为 Golem 这个 Class 的代码中有 `__init__()`，所以，当 `g` 被创建的时候，`g` 就需要被初始化……
 > * 在 `g` 所在的变量目录中，出现了一个叫做 `self` 的用来指代 `g` 本身的变量；
 > * self.name 接收了一个参数，`'Clay'`，并将其保存了下来；
-> * 生成了一个叫做 `self.built_year` 的变量，其中保存的是 `g` 这个 Object 被创建时的年份…… 
+> * 生成了一个叫做 `self.built_year` 的变量，其中保存的是 `g` 这个 Object 被创建时的年份……
 
-对了，Golem 和 Robot 一样，都是机器人的意思；Golem 的本义来自于犹太神话，一个被赋予了生命的泥人…… 
+对了，Golem 和 Robot 一样，都是机器人的意思；Golem 的本义来自于犹太神话，一个被赋予了生命的泥人……
 
 ## Inheritance
 
 我们刚刚创建了一个 Golem Class，如果我们想用它 Inherite 一个新的 Class，比如，`Running_Golem`，一个能跑的机器人，那就像以下的代码那样做 —— 注意 `class Running_Golem` 之后的圆括号：
+
 ```python
 from IPython.core.interactiveshell import InteractiveShell
 InteractiveShell.ast_node_interactivity = "all"
@@ -90,19 +95,24 @@ class Golem:
     def say_hi(self):
         print('Hi!')
 
-class Running_Golem(Golem):      # 刚刚就说，这个圆括号另有用途…… 
+class Running_Golem(Golem):      # 刚刚就说，这个圆括号另有用途……
 
     def run(self):
         print("Can't you see? I'm running...")
 
 rg = Running_Golem('Clay')
+
 rg.run
 rg.run()
 rg.name
 rg.built_year
 rg.say_hi()
 ```
+
+    <bound method Running_Golem.run of <__main__.Running_Golem object at 0x1068b37b8>>
     Can't you see? I'm running...
+    'Clay'
+    2019
     Hi!
 
 如此这般，我们根据 Golem 这个 Class 创造了一个 Subclass —— `Running_Golem`，既然它是 Golem 的 Inheritance，那么 Golem 有的 Attributes 和 Methods 它都有，并且还多了一个 Method —— `self.run`。
@@ -110,6 +120,7 @@ rg.say_hi()
 ## Overrides
 
 当我们创建一个 Inherited Class 的时候，可以重写（Overriding）Parent Class 中的 Methods。比如这样：
+
 ```python
 from IPython.core.interactiveshell import InteractiveShell
 InteractiveShell.ast_node_interactivity = "all"
@@ -129,7 +140,7 @@ class runningGolem(Golem):
     def run(self):
         print("Can't you see? I'm running...")
 
-    def say_hi(self):                            # 不再使用 Parent Class 中的定义，而是新的…… 
+    def say_hi(self):                            # 不再使用 Parent Class 中的定义，而是新的……
         print('Hey! Nice day, Huh?')
 
 rg = runningGolem('Clay')
@@ -139,7 +150,8 @@ rg.name
 rg.built_year
 rg.say_hi()
 ```
-    <bound method runningGolem.run of <__main__.runningGolem object at 0x1056f9358>>
+
+    <bound method runningGolem.run of <__main__.runningGolem object at 0x1068c8128>>
     Can't you see? I'm running...
     'Clay'
     2019
@@ -148,11 +160,13 @@ rg.say_hi()
 ## Inspecting A Class
 
 当我们作为用户想了解一个 Class 的 Interface，即，它的 Attributes 和 Methods 的时候，常用的有三种方式：
+
 ```python
 1. help(object)
 2. dir(object)
 3. object.__dict__
 ```
+
 ```python
 from IPython.core.interactiveshell import InteractiveShell
 InteractiveShell.ast_node_interactivity = "all"
@@ -172,7 +186,7 @@ class runningGolem(Golem):
     def run(self):
         print('Can\'t you see? I\'m running...')
 
-    def say_hi(self):                            # 不再使用 Parent Class 中的定义，而是新的…… 
+    def say_hi(self):                            # 不再使用 Parent Class 中的定义，而是新的……
         print('Hey! Nice day, Huh?')
 
 rg = runningGolem('Clay')
@@ -181,8 +195,9 @@ dir(rg)
 rg.__dict__
 hasattr(rg, 'built_year')
 ```
-    Help on runningGolem in module __main__ object:
 
+    Help on runningGolem in module __main__ object:
+    
     class runningGolem(Golem)
      |  runningGolem(name=None)
      |
@@ -211,7 +226,7 @@ hasattr(rg, 'built_year')
      |
      |  __weakref__
      |      list of weak references to the object (if defined)
-
+    
     ['__class__',
      '__delattr__',
      '__dict__',
@@ -250,13 +265,10 @@ hasattr(rg, 'built_year')
 每个变量都属于某一个 **Scope**（变量的作用域），在同一个 Scope 中，变量可以被引用被操作…… 这么说非常抽象，难以理解 —— 只能通过例子说明。
 
 我们先给 Golem 这个 Class 增加一点功能 —— 我们需要随时知道究竟有多少个 Golem 处于活跃状态…… 也因此顺带给 Golem 加上一个 Method：`cease()` —— 哈！机器人么，想关掉它，说关掉它，就能关掉它；
-我们先给 Golem 这个 Class 增加一点功能 —— 我们需要随时知道究竟有多少个 Golem 处于活跃状态…… 也因此顺带给 Golem 加上一个 Method：`cease()` —— 哈！机器人么，想关掉它，说关掉它，就能关掉它；
 
 另外，我们还要给机器人设置个使用年限，比如 10 年；
 
 …… 而外部会每隔一段时间，用 `Golem.is_active()` 去检查所有的机器人，所以，不需要外部额外操作，到了年头，它应该能关掉自己。—— 当然，又由于以下代码是简化书写的，核心目的是为了讲解 Scope，所以并没有专门写模拟 10 年后某些机器人自动关闭的情形……
-—— 而外部会每隔一段时间，用 `Golem.is_active()` 去检查所有的机器人，所以，不需要外部额外操作，到了年头，它应该能关掉自己。—— 当然，又由于以下代码是简化书写的，核心目的是为了讲解 Scope，所以并没有专门写模拟 10 年后某些机器人自动关闭的情形…… 
-—— 而外部会每隔一段时间，用 `Golem.is_active()` 去检查所有的机器人，所以，不需要外部额外操作，到了年头，它应该能关掉自己。—— 当然，又由于以下代码是简化书写的，核心目的是为了讲解 Scope，所以并没有专门写模拟 10 年后某些机器人自动关闭的情形…… 
 
 在运行以下代码之前，需要先介绍三个 Python 的内建函数：
 
@@ -265,6 +277,7 @@ hasattr(rg, 'built_year')
 > * `setattr(object, attr, value)` 将这个 `object` 中的 `attr` 值设置为 `value`
 
 现在的你，应该一眼望过去，就已经能掌握这三个内建函数的用法 —— 还记得之前的你吗？眼睁睁看着，那些字母放在那里对你来说没任何意义…… 这才多久啊！
+
 ```python
 from IPython.core.interactiveshell import InteractiveShell
 InteractiveShell.ast_node_interactivity = "all"
@@ -278,14 +291,14 @@ class Golem:
         self.name = name
         self.built_year = datetime.date.today().year
         self.__active = True
-        Golem.population += 1
+        Golem.population += 1          # 执行一遍之后，试试把这句改成 population += 1
 
     def say_hi(self):
         print('Hi!')
 
     def cease(self):
         self.__active = False
-        Golem.population -= 1          # 执行一遍之后，试试把这句改成 population += 1
+        Golem.population -= 1
 
     def is_active(self):
         if datetime.date.today().year - self.built_year >= Golem.__life_span:
@@ -308,6 +321,7 @@ Golem.population                  # 10
 getattr(g, 'population')          # 10
 g.is_active()
 ```
+
     True
     True
     False
@@ -321,20 +335,19 @@ g.is_active()
     True
 
 如果你试过把第 13 行的 `Golem.population += 1` 改成 `population += 1`，你会被如下信息提醒：
+
 ```python
      12         self.__active = True
 ---> 13         population += 1
 UnboundLocalError: local variable 'population' referenced before assignment
 ```
-—— 本地变量 `population` 尚未赋值，就已经提前被引用…… 为什么会这样呢？因为在你所创建 `g` 之后，马上执行的是 `__init()__` 这个初始化函数，而 `population` 是在这个函数之外定义的…… 
+—— 本地变量 `population` 尚未赋值，就已经提前被引用…… 为什么会这样呢？因为在你所创建 `g` 之后，马上执行的是 `__init()__` 这个初始化函数，而 `population` 是在这个函数之外定义的……
 
-如果你足够细心，你会发现这个版本中，有些变量前面有两个下划线 `__`，比如，`__life_span` 和 `self.__active`。这是 Python 的定义，变量名前面加上一个以上下划线（Underscore） `_` 的话，那么该变量是 “私有变量”（Private Variables），不能被外部引用。而按照 Python 的惯例，我们会使用两个下划线起始，去命名私有变量，如： `__life_span`。你可以回去试试，把所有的 `__life_span` 改成 `_life_span`（即，变量名开头只有一个 `_`，那么，`hasattr(Golem, '_life_span')` 和 `hasattr(g, '_life_span')` 的返回值就都变成了 `True`。
-如果你足够细心，你会发现这个版本中，有些变量前面有两个下划线 `__`，比如，`__life_span` 和 `self.__active`。这是 Python 的定义，变量名前面加上一个以上下划线（Underscore）`_` 的话，那么该变量是 “私有变量”（Private Variables），不能被外部引用。而按照 Python 的惯例，我们会使用两个下划线起始，去命名私有变量，如：`__life_span`。你可以回去试试，把所有的 `__life_span` 改成 `_life_span`（即，变量名开头只有一个 `_`，那么，`hasattr(Golem, '_life_span')` 和 `hasattr(g, '_life_span')` 的返回值就都变成了 `True`。
 如果你足够细心，你会发现这个版本中，有些变量前面有两个下划线 `__`，比如，`__life_span` 和 `self.__active`。这是 Python 的定义，变量名前面加上一个以上下划线（Underscore）`_` 的话，那么该变量是 “私有变量”（Private Variables），不能被外部引用。而按照 Python 的惯例，我们会使用两个下划线起始，去命名私有变量，如：`__life_span`。你可以回去试试，把所有的 `__life_span` 改成 `_life_span`（即，变量名开头只有一个 `_`，那么，`hasattr(Golem, '_life_span')` 和 `hasattr(g, '_life_span')` 的返回值就都变成了 `True`。
 
-看看下面的图示，理解起来更为直观一些：
+看看下面的图示，理解起来更为直观一些，其中每个方框代表一个 Scope：
 
-![](../images/class-variables-scope.png)
+![](https://raw.githubusercontent.com/selfteaching/the-craft-of-selfteaching/master/images/class-variables-scope.png?raw=true)
 
 整个代码启动之后，总计有 4 个 Scopes 如图所示：
 
@@ -353,13 +366,22 @@ UnboundLocalError: local variable 'population' referenced before assignment
 
 Scope ④ 与 Scope ③ 平行存在。所以在这里，`population` 和 `__life_span` 也同样并不存在。
 
+**补充**
+
+在本例子中，在 `__init__(self, name=None)` 函数中 `self.population` 和 `Golem.population` 都可以使用，但使用效果是不一样的：
+
+> * `self.population` 总是去读取 `Golem` 类中 `population` 的初始值，即使后面通过 `setattr(Golem, 'population', 10)` 更改 `population` 的值后，`self.population` 的值仍为 `0`，但 `Golem.population` 值则为 `10`，你可以自己动手尝试一下。
+
 ## Encapsulation
 
 到目前为止，Golem 这个 Class 看起来不错，但有个问题，它里面的数据，外面是可以随便改的 —— 虽然，我们已经通过给变量 life_span 前面加上两个下划线，变成 `__life_span`，使其成为私有变量，外部不能触达（你不能引用 `Golem.__life_span`），可 Golem.population 就不一样，外面随时可以引用，还可以随时修改它，只需要写上一句：
+
 ```python
 Golem.population = 1000000
 ```
+
 我们干脆把 `population` 这个变量也改成私有的罢：`__population`，而后需要从外界查看这个变量的话，就在 Class 里面写个函数，返回那个值好了：
+
 ```python
 from IPython.core.interactiveshell import InteractiveShell
 InteractiveShell.ast_node_interactivity = "all"
@@ -394,10 +416,12 @@ g = Golem('Clay')
 g.population
 g.population()
 ```
-    <bound method Golem.population of <__main__.Golem object at 0x1036f5cc0>>
+
+    <bound method Golem.population of <__main__.Golem object at 0x1068da160>>
     1
 
 如果，你希望外部能够像获得 Class 的属性那样，直接写 `g.population`，而不是必须加上一个括号 `g.population()` 传递参数（实际上传递了一个隐含的 `self` 参数），那么可以在 `def population(self):` 之前的一行加上一句 `@property`：
+
 ```python
 class Golem:
     __population = 0
@@ -407,7 +431,9 @@ class Golem:
     def population(self):
         return Golem.__population
 ```
+
 如此这般之后，你就可以用 `g.population` 了：
+
 ```python
 from IPython.core.interactiveshell import InteractiveShell
 InteractiveShell.ast_node_interactivity = "all"
@@ -443,9 +469,11 @@ g = Golem('Clay')
 g.population
 # g.population = 100
 ```
+
     1
 
 如此这般之后，不仅你可以直接引用 `g.population`，并且，在外部不能再直接给 `g.population` 赋值了，否则会报错：
+
 ```python
 ---------------------------------------------------------------------------
 AttributeError                            Traceback (most recent call last)
@@ -456,6 +484,7 @@ AttributeError                            Traceback (most recent call last)
 
 AttributeError: can't set attribute
 ```
+
 到此为止，Encapsulation 就做得不错了。
 
 如果你非得希望从外部可以设置这个值，那么，你就得再写个函数，并且在函数之前加上一句：
@@ -469,8 +498,11 @@ AttributeError: can't set attribute
     @population.setter
     def population(self, value):
         Golem.__population = value
+
 ```
+
 这样之后，`.population` 这个 Attribute 就可以从外部被设定其值了（虽然在当前的例子中显得没必要让外部设定 `__population` 这个值…… 以下仅仅是为了举例）：
+
 ```python
 from IPython.core.interactiveshell import InteractiveShell
 InteractiveShell.ast_node_interactivity = "all"
@@ -520,8 +552,11 @@ getattr(Golem, 'population')
 setattr(Golem, 'population', 10000)
 g.population    # 所以，在很多的情况下，不把数据封装在 Class 内部的话，后面会有很多麻烦。
 ```
-    Help on class Golem in module __main__:
 
+    1
+    101
+    101
+    Help on class Golem in module __main__:
     class Golem(builtins.object)
      |  Golem(name=None)
      |
@@ -546,6 +581,19 @@ g.population    # 所以，在很多的情况下，不把数据封装在 Class �
      |      list of weak references to the object (if defined)
      |
      |  population
-
+    mappingproxy({'__module__': '__main__',
+                  '_Golem__population': 101,
+                  '_Golem__life_span': 10,
+                  '__init__': <function __main__.Golem.__init__(self, name=None)>,
+                  'say_hi': <function __main__.Golem.say_hi(self)>,
+                  'cease': <function __main__.Golem.cease(self)>,
+                  'is_active': <function __main__.Golem.is_active(self)>,
+                  'population': <property at 0x1068f9d68>,
+                  '__dict__': <attribute '__dict__' of 'Golem' objects>,
+                  '__weakref__': <attribute '__weakref__' of 'Golem' objects>,
+                  '__doc__': None})
+    {'name': 'Clay', 'built_year': 2019, '_Golem__active': True}
+    True
+    <property at 0x1068f9d68>
     10000
 
